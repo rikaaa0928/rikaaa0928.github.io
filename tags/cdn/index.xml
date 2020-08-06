@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cdn on Banbanzai</title>
+    <link>/tags/cdn/</link>
+    <description>Recent content in cdn on Banbanzai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 09 Feb 2020 18:19:36 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/cdn/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>cloudflare cdn data center</title>
+      <link>/posts/cloudflare_cdn_data_center/</link>
+      <pubDate>Sun, 09 Feb 2020 18:19:36 +0800</pubDate>
+      
+      <guid>/posts/cloudflare_cdn_data_center/</guid>
+      <description>162.158.26.1
+172.68.144.1
+172.69.152.1
+104.19.195.151
+104.18.177.69
+104.25.176.1
+104.19.195.151 美国 CloudFlare公司CDN节点(移动快)(using)
+104.18.177.69 美国 CloudFlare公司CDN节点(移动快)
+AS13335
+104.25.176.0/20 美国 CloudFlare公司CDN节点(移动快)
+104.16.0.0/20 美国 CloudFlare公司CDN节点(移动快)
+可以设置用于 移动网络
+108.162.227.1
+162.158.4.1
+172.69.152.1
+104.20.157.155 美国 CloudFlare公司CDN节点（联通快）
+104.20.66.66 美国 CloudFlare公司CDN节点（联通快）
+可以设置用于 联通网络
+162.158.116.1
+108.162.226.1
+可以设置用于 默认网络
+172.68.32.1
+108.162.243.1
+108.162.245.1
+108.162.246.1
+172.68.172.1
+104.25.183.205 美国 CloudFlare公司CDN节点(电信快</description>
+    </item>
+    
+  </channel>
+</rss>

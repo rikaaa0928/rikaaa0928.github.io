@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>md on Banbanzai</title>
+    <link>/tags/md/</link>
+    <description>Recent content in md on Banbanzai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 13 Dec 2019 21:20:09 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/md/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Howto: md</title>
+      <link>/posts/how_to_md/</link>
+      <pubDate>Fri, 13 Dec 2019 21:20:09 +0800</pubDate>
+      
+      <guid>/posts/how_to_md/</guid>
+      <description>* 无序列表
+ 1 2  1. 列表嵌套
+- 四个空格
+* 四个空格
+2. 列表2
+ 列表嵌套  四个空格  四个空格     列表2  **加粗** 或 __a__ : 加粗 a
+*斜体* 或 _斜体_ : 斜体
+*__加粗斜体__* : 加粗斜体
+&amp;amp;ensp; &amp;amp;emsp; &amp;amp;nbsp; : 中，大，小空格
+1. 有序
+2. 列表
+ 有序 列表  ~~delete~~:~~delete~~
+&amp;lt;del&amp;gt;delete&amp;lt;/del&amp;gt;:delete
+# 标题
+标题 表格 c1|c2|c3
+-|-|-
+a|b|c
+A|B|C
+   c1 c2 c3     a b c   A B C    `code` : code</description>
+    </item>
+    
+  </channel>
+</rss>

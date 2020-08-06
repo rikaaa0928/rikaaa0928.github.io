@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>golang on Banbanzai</title>
+    <link>/tags/golang/</link>
+    <description>Recent content in golang on Banbanzai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 05 Aug 2020 13:32:27 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>github action create go release</title>
+      <link>/posts/github_action/</link>
+      <pubDate>Wed, 05 Aug 2020 13:32:27 +0800</pubDate>
+      
+      <guid>/posts/github_action/</guid>
+      <description># This is a basic workflow to help you get started with Actions name: CI # Controls when the action will run. Triggers the workflow on push or pull request # events but only for the master branch on: push: # Sequence of patterns matched against refs/tags tags: - &amp;#39;v*&amp;#39; # Push events to matching v*, i.e. v1.0, v20.15.10 # A workflow run is made up of one or more jobs that can run sequentially or in parallel jobs: releases-matrix: name: Release Go Binary runs-on: ubuntu-latest steps: - name: Checkout code uses: actions/checkout@v2 - uses: actions/setup-go@v2 - name: Build project # This would actually build your project, using zip for an example artifact run: go mod tidy &amp;amp;&amp;amp; .</description>
+    </item>
+    
+    <item>
+      <title>vscode golang</title>
+      <link>/posts/vscode_golang/</link>
+      <pubDate>Sun, 26 Jan 2020 00:03:34 +0800</pubDate>
+      
+      <guid>/posts/vscode_golang/</guid>
+      <description>{ &amp;quot;go.formatTool&amp;quot;: &amp;quot;goimports&amp;quot;, &amp;quot;go.testFlags&amp;quot;: [ &amp;quot;-v&amp;quot; ] }</description>
+    </item>
+    
+    <item>
+      <title>go env</title>
+      <link>/posts/go_env/</link>
+      <pubDate>Sat, 14 Dec 2019 15:25:15 +0800</pubDate>
+      
+      <guid>/posts/go_env/</guid>
+      <description>go env 查看所有相关环境
+go env -w 设置默认值
+go env -u unset
+GOSUMDB 默认：sum.golang.org，mod模式下校验包 GONOSUMDB url下忽略mod模式下的校验
+GOPROXY gomod代理
+GONOPROXY 为url取消代理
+GOPRIVATE：GONOSUMDB+GONOPROXY</description>
+    </item>
+    
+    <item>
+      <title>Golang json.Marshal</title>
+      <link>/posts/go_json_marshal/</link>
+      <pubDate>Sat, 14 Dec 2019 15:23:29 +0800</pubDate>
+      
+      <guid>/posts/go_json_marshal/</guid>
+      <description>会对key进行排序</description>
+    </item>
+    
+  </channel>
+</rss>

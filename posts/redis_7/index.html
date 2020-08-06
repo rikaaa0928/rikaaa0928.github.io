@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="Tsuruno Yui">
+    <meta name="description" content="Record">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Redis第七周"/>
+<meta name="twitter:description" content="Redis 基础结构 dict时redis中的字典结构，包含两个dictht（hash table哈希表）
+typedef struct dict { dictType *type; //type中定义了对于Hash表的操作函数，比如Hash函数，key比较函数等 void *privdata; //privdata是可以传递给dict的私有数据 dictht ht[2]; //每一个dict都包含两个dictht，一个用于rehash int rehashidx; //表示此时是否在进行rehash操作 int iterators; //迭代器 } dict; 哈希表
+typedef struct dictht { dictEntry **table; //数组指针，每个元素都是一个指向dictEntry的指针 unsigned long size; //表示这个dictht已经分配空间的大小，大小总是2^n unsigned long sizemask; //sizemask = size - 1; 是用来求hash值的掩码，为2^n-1 unsigned long used; //目前已有的元素数量 } dictht; hashtable中存储k-v结构的链表结构
+typedef struct dictEntry { void *key; //key void*表示任意类型指针 union { //联合体中对于数字类型提供了专门的类型优化 void *val; uint64_t u64; int64_t s64; } v; struct dictEntry *next; //next指针 } dictEntry; redisObject储存key和value"/>
+
+    <meta property="og:title" content="Redis第七周" />
+<meta property="og:description" content="Redis 基础结构 dict时redis中的字典结构，包含两个dictht（hash table哈希表）
+typedef struct dict { dictType *type; //type中定义了对于Hash表的操作函数，比如Hash函数，key比较函数等 void *privdata; //privdata是可以传递给dict的私有数据 dictht ht[2]; //每一个dict都包含两个dictht，一个用于rehash int rehashidx; //表示此时是否在进行rehash操作 int iterators; //迭代器 } dict; 哈希表
+typedef struct dictht { dictEntry **table; //数组指针，每个元素都是一个指向dictEntry的指针 unsigned long size; //表示这个dictht已经分配空间的大小，大小总是2^n unsigned long sizemask; //sizemask = size - 1; 是用来求hash值的掩码，为2^n-1 unsigned long used; //目前已有的元素数量 } dictht; hashtable中存储k-v结构的链表结构
+typedef struct dictEntry { void *key; //key void*表示任意类型指针 union { //联合体中对于数字类型提供了专门的类型优化 void *val; uint64_t u64; int64_t s64; } v; struct dictEntry *next; //next指针 } dictEntry; redisObject储存key和value" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/redis_7/" />
+<meta property="article:published_time" content="2019-12-18T15:06:24+08:00" />
+<meta property="article:modified_time" content="2019-12-18T15:06:24+08:00" />
+
+
+    
+      <base href="/posts/redis_7/">
+    
+    <title>
+  Redis第七周 · Banbanzai
+</title>
+
+    
+      <link rel="canonical" href="/posts/redis_7/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.28d751104f30c16da1aa1bb04015cbe662cacfe0d1b01af4f2240ad58580069c.css" integrity="sha256-KNdREE8wwW2hqhuwQBXL5mLKz&#43;DRsBr08iQK1YWABpw=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+      <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    
+    
+    <link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.62.0-DEV" />
+  </head>
+
+  
+  
+  <body class="colorscheme-light">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Banbanzai
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/posts/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/categories/">Categories</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/tags/">Tags</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/external">External</a>
+          </li>
+        
+      
+      
+    </ul>
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">Redis第七周</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2019-12-18T15:06:24&#43;08:00'>
+                December 18, 2019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              2 minutes read
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="/categories/summary/">summary</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="/tags/rdis/">rdis</a></div>
+
+        </div>
+      </header>
+
+      <div>
+        <h1 id="redis-">Redis 基础结构</h1>
+<p>dict时redis中的字典结构，包含两个dictht（hash table哈希表）</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">typedef struct dict {
+    dictType *type;     //type中定义了对于Hash表的操作函数，比如Hash函数，key比较函数等
+
+    void *privdata;      //privdata是可以传递给dict的私有数据         
+
+    dictht ht[2];       //每一个dict都包含两个dictht，一个用于rehash
+
+    int rehashidx;      //表示此时是否在进行rehash操作
+
+    int iterators;      //迭代器
+} dict;
+</code></pre></div><p>哈希表</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">typedef struct dictht {
+    dictEntry **table;        //数组指针，每个元素都是一个指向dictEntry的指针
+
+    unsigned long size;       //表示这个dictht已经分配空间的大小，大小总是2^n
+
+    unsigned long sizemask;   //sizemask = size - 1; 是用来求hash值的掩码，为2^n-1
+
+    unsigned long used;       //目前已有的元素数量
+} dictht;
+</code></pre></div><p>hashtable中存储k-v结构的链表结构</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">typedef struct dictEntry {
+    void *key;                //key void*表示任意类型指针
+
+    union {                   //联合体中对于数字类型提供了专门的类型优化
+       void      *val;
+       uint64_t  u64;
+       int64_t   s64;
+    } v;
+
+    struct dictEntry *next;   //next指针
+
+} dictEntry;
+</code></pre></div><p>redisObject储存key和value</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">typedef struct redisObject {
+
+    // 数据类型
+    unsigned type:4;
+
+    // 编码
+    unsigned encoding:4;
+
+    // 对象最后一次被访问的时间
+    unsigned lru:REDIS_LRU_BITS; /* lru time (relative to server.lruclock) */
+
+    // 引用计数
+    int refcount;
+
+    // 指向实际值的指针
+    void *ptr;
+
+} robj;
+</code></pre></div><p>sds的数据结构__attribute__ ((__packed__))紧凑模式分配内存，不对齐，内存使用效率更高，可以通过计算偏移获得相邻属性
+sdshdr5长度信息写在flag高5位，最长31个字节<br>
+创建sds时根据长度选择最小的hdr，空字符串时会创建hdr8，因为空字符串会append，hdr5很可能需要换hdr<br>
+扩展长度时alloc &gt; newlen （优先扩展）<br>
+缩小长度时不会重新分配小空间或换小sdshsdr<br>
+sdsnew函数创建sds</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">struct __attribute__ ((__packed__)) sdshdr5 {
+    unsigned char flags; /* 3 lsb of type, and 5 msb of string length */
+    char buf[];
+};
+struct __attribute__ ((__packed__)) sdshdr8 {
+    uint8_t len; /* used */
+    uint8_t alloc; /* excluding the header and null terminator */
+    unsigned char flags; /* 3 lsb of type, 5 unused bits */
+    char buf[];
+};
+struct __attribute__ ((__packed__)) sdshdr16 {
+    uint16_t len; /* used */
+    uint16_t alloc; /* excluding the header and null terminator */
+    unsigned char flags; /* 3 lsb of type, 5 unused bits */
+    char buf[];
+};
+struct __attribute__ ((__packed__)) sdshdr32 {
+    uint32_t len; /* used */
+    uint32_t alloc; /* excluding the header and null terminator */
+    unsigned char flags; /* 3 lsb of type, 5 unused bits */
+    char buf[];
+};
+struct __attribute__ ((__packed__)) sdshdr64 {
+    uint64_t len; /* used */
+    uint64_t alloc; /* excluding the header and null terminator */
+    unsigned char flags; /* 3 lsb of type, 5 unused bits */
+    char buf[];
+};
+</code></pre></div><p>redis的数据类型和编码</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>编码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>string</td>
+<td>int</td>
+</tr>
+<tr>
+<td>string</td>
+<td>embstr(sds &lt;=44 bytes)</td>
+</tr>
+<tr>
+<td>string</td>
+<td>raw(sds &gt;44 bytes)</td>
+</tr>
+<tr>
+<td>list</td>
+<td>ziplist</td>
+</tr>
+<tr>
+<td>list</td>
+<td>linkedlist</td>
+</tr>
+<tr>
+<td>set</td>
+<td>intset</td>
+</tr>
+<tr>
+<td>set</td>
+<td>hashtable</td>
+</tr>
+<tr>
+<td>hash</td>
+<td>ziplist</td>
+</tr>
+<tr>
+<td>hash</td>
+<td>hashtable</td>
+</tr>
+<tr>
+<td>sorted set</td>
+<td>ziplist</td>
+</tr>
+<tr>
+<td>sorted set</td>
+<td>skiplist</td>
+</tr>
+</tbody>
+</table>
+<h1 id="redis-string">Redis String</h1>
+<p>redis的string有3种编码形式:raw,int和embstr</p>
+<ol>
+<li>初始redis会将string类数据使用raw编码为robj</li>
+<li>分析robj，若ptr(sds)的内容是范围内的整形，删掉原ptr分配的内存，挂上long;如果长度小于44，一次分配内存，生成一个包含sdshdr8的robj，通过位偏移可以找到sds的地址，替换原robj</li>
+</ol>
+<p>单次分配robj最长64字节,embstr最长44个字节</p>
+<p>INCRBTFLOAT精度问题strtold(long double)和数据范围问题（小于int64）</p>
+
+      </div>
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "banbanzai" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+        
+      </footer>
+    </article>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js" id="MathJax-script"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ['$', '$'], ['\\(', '\\)']
+        ],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+      <p>Miracles and Magic Are Real</p>
+    
+     © 2020
+    
+       · 
+      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-64068696-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+  </body>
+
+</html>

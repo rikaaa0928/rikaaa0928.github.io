@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>goalng on Banbanzai</title>
+    <link>/tags/goalng/</link>
+    <description>Recent content in goalng on Banbanzai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 26 Jan 2020 00:03:34 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/goalng/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>vscode golang</title>
+      <link>/posts/vscode_golang/</link>
+      <pubDate>Sun, 26 Jan 2020 00:03:34 +0800</pubDate>
+      
+      <guid>/posts/vscode_golang/</guid>
+      <description>{ &amp;quot;go.formatTool&amp;quot;: &amp;quot;goimports&amp;quot;, &amp;quot;go.testFlags&amp;quot;: [ &amp;quot;-v&amp;quot; ] }</description>
+    </item>
+    
+  </channel>
+</rss>

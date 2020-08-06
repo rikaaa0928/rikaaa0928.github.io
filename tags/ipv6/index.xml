@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ipv6 on Banbanzai</title>
+    <link>/tags/ipv6/</link>
+    <description>Recent content in ipv6 on Banbanzai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 13 Dec 2019 21:49:14 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/ipv6/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Windows Temporary IPv6 addresse</title>
+      <link>/posts/windows_temporary_ipv6_addr/</link>
+      <pubDate>Fri, 13 Dec 2019 21:49:14 +0800</pubDate>
+      
+      <guid>/posts/windows_temporary_ipv6_addr/</guid>
+      <description>Check:
+netsh interface ipv6 show privacy
+netsh interface ipv6 set global randomizeidentifiers=disabled
+netsh interface ipv6 set privacy state=disabled</description>
+    </item>
+    
+    <item>
+      <title>Linux ipv6 forwarding</title>
+      <link>/posts/linux_ipv6_forwarding/</link>
+      <pubDate>Fri, 13 Dec 2019 21:06:20 +0800</pubDate>
+      
+      <guid>/posts/linux_ipv6_forwarding/</guid>
+      <description>net.ipv6.conf.all.forwarding = 1
+net.ipv6.conf.all. accept_ra = 2
+accept_ra
+Type: BOOLEAN
+Accept Router Advertisements; autoconfigure using them.
+Possible values are:
+ 0: Do not accept Router Advertisements. 1: Accept Router Advertisements if forwarding is disabled. 2: Overrule forwarding behaviour. Accept Router Advertisements even if forwarding is enabled.  </description>
+    </item>
+    
+  </channel>
+</rss>

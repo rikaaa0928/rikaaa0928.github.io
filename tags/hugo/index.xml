@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hugo on Banbanzai</title>
+    <link>/tags/hugo/</link>
+    <description>Recent content in hugo on Banbanzai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 14 Dec 2019 19:34:57 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Howto: Hugo</title>
+      <link>/posts/howto_hugo/</link>
+      <pubDate>Sat, 14 Dec 2019 19:34:57 +0800</pubDate>
+      
+      <guid>/posts/howto_hugo/</guid>
+      <description>hugo new dict/uri.md
+更新日期 lastmod=*** \\主题原因不生效？
+hugo markdown不支持~~delete~~，可以使用&amp;lt;del&amp;gt;delete&amp;lt;/del&amp;gt;
+delete
+需要添加配置
+[markup.goldmark.renderer] unsafe= true </description>
+    </item>
+    
+  </channel>
+</rss>

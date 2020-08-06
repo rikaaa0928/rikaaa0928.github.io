@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>code on Banbanzai</title>
+    <link>/tags/code/</link>
+    <description>Recent content in code on Banbanzai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 14 Dec 2019 15:25:15 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/code/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>go env</title>
+      <link>/posts/go_env/</link>
+      <pubDate>Sat, 14 Dec 2019 15:25:15 +0800</pubDate>
+      
+      <guid>/posts/go_env/</guid>
+      <description>go env 查看所有相关环境
+go env -w 设置默认值
+go env -u unset
+GOSUMDB 默认：sum.golang.org，mod模式下校验包 GONOSUMDB url下忽略mod模式下的校验
+GOPROXY gomod代理
+GONOPROXY 为url取消代理
+GOPRIVATE：GONOSUMDB+GONOPROXY</description>
+    </item>
+    
+    <item>
+      <title>Using jQuery in electron app with require</title>
+      <link>/posts/jquery_in_electron_require/</link>
+      <pubDate>Fri, 13 Dec 2019 21:49:46 +0800</pubDate>
+      
+      <guid>/posts/jquery_in_electron_require/</guid>
+      <description>&amp;lt;script&amp;gt;window.$ = window.jQuery = require(‘jquery’);&amp;lt;/script&amp;gt;</description>
+    </item>
+    
+    <item>
+      <title>electron-builder portable env</title>
+      <link>/posts/electron_builder_portable_env/</link>
+      <pubDate>Fri, 13 Dec 2019 21:48:52 +0800</pubDate>
+      
+      <guid>/posts/electron_builder_portable_env/</guid>
+      <description>process.env.PORTABLE_EXECUTABLE_DIR : full path without file name
+process.env.PORTABLE_EXECUTABLE_APP_FILENAME : file name in package.json
+process.env.PORTABLE_EXECUTABLE_FILE : full path with file name</description>
+    </item>
+    
+  </channel>
+</rss>

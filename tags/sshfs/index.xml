@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sshfs on Banbanzai</title>
+    <link>/tags/sshfs/</link>
+    <description>Recent content in sshfs on Banbanzai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 05 Jan 2020 11:47:34 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/sshfs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>systemd mount sshfs</title>
+      <link>/posts/systemd_mount/</link>
+      <pubDate>Sun, 05 Jan 2020 11:47:34 +0800</pubDate>
+      
+      <guid>/posts/systemd_mount/</guid>
+      <description>[Unit]
+Description=sshfs
+After=network-online.target network.target
+Wants=network-online.target systemd-networkd-wait-online.service network.target
+[Install]
+WantedBy=multi-user.target
+[Mount]
+What=user@ip:path
+Where=path
+Type=fuse.sshfs
+Options=_netdev,x-systemd.automount,reconnect,idmap=user,allow_other
+TimeoutSec=60</description>
+    </item>
+    
+  </channel>
+</rss>

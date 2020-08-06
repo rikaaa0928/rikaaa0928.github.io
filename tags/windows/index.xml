@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>windows on Banbanzai</title>
+    <link>/tags/windows/</link>
+    <description>Recent content in windows on Banbanzai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 13 Dec 2019 21:49:14 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Windows Temporary IPv6 addresse</title>
+      <link>/posts/windows_temporary_ipv6_addr/</link>
+      <pubDate>Fri, 13 Dec 2019 21:49:14 +0800</pubDate>
+      
+      <guid>/posts/windows_temporary_ipv6_addr/</guid>
+      <description>Check:
+netsh interface ipv6 show privacy
+netsh interface ipv6 set global randomizeidentifiers=disabled
+netsh interface ipv6 set privacy state=disabled</description>
+    </item>
+    
+  </channel>
+</rss>

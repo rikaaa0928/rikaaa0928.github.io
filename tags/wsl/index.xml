@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>wsl on Banbanzai</title>
+    <link>/tags/wsl/</link>
+    <description>Recent content in wsl on Banbanzai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 27 Jan 2020 18:50:15 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/wsl/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>wsl service and more</title>
+      <link>/posts/wsl_service/</link>
+      <pubDate>Mon, 27 Jan 2020 18:50:15 +0800</pubDate>
+      
+      <guid>/posts/wsl_service/</guid>
+      <description>nohup command &amp;gt; /dev/null 2&amp;gt;&amp;amp;1 &amp;amp;
+&amp;gt;表示1&amp;gt;，重定向标准输出，2&amp;gt;重定向标准错误，&amp;amp;1指重定向至标准输出
+wsl中的script，可以在windows中使用wsl -d {wsl名称} -u {username} -e {command}执行
+可以使用vbs屏蔽弹出的shell/cmd窗口:
+Set ws = CreateObject(&amp;#34;Wscript.Shell&amp;#34;) ws.run &amp;#34;wsl -d {wsl名称} -u {username} -e {command}&amp;#34;, vbhide visudo 中添加 {username} ALL=(root) NOPASSWD: {path_to_script} 可以解决sudo执行密码的问题</description>
+    </item>
+    
+  </channel>
+</rss>
