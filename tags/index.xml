@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Banbanzai</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 05 Aug 2020 13:32:27 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 13 Aug 2020 18:51:17 +0800</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>golang</title>
+      <link>/tags/golang/</link>
+      <pubDate>Thu, 13 Aug 2020 18:51:17 +0800</pubDate>
+      
+      <guid>/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gomod</title>
+      <link>/tags/gomod/</link>
+      <pubDate>Thu, 13 Aug 2020 18:51:17 +0800</pubDate>
+      
+      <guid>/tags/gomod/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>github action</title>
@@ -17,15 +35,6 @@
       <pubDate>Wed, 05 Aug 2020 13:32:27 +0800</pubDate>
       
       <guid>/tags/github-action/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>golang</title>
-      <link>/tags/golang/</link>
-      <pubDate>Wed, 05 Aug 2020 13:32:27 +0800</pubDate>
-      
-      <guid>/tags/golang/</guid>
       <description></description>
     </item>
     

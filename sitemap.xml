@@ -4,12 +4,47 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-08-05T13:32:27+08:00</lastmod>
+    <lastmod>2020-08-13T18:51:17+08:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2020-08-05T13:32:27+08:00</lastmod>
+    <lastmod>2020-08-13T18:51:17+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/go_mod_version/</loc>
+    <lastmod>2020-08-13T18:51:17+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/golang/</loc>
+    <lastmod>2020-08-13T18:51:17+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/gomod/</loc>
+    <lastmod>2020-08-13T18:51:17+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/note/</loc>
+    <lastmod>2020-08-13T18:51:17+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2020-08-13T18:51:17+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-08-13T18:51:17+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/go_mod_command/</loc>
+    <lastmod>2020-08-13T18:12:54+08:00</lastmod>
   </url>
   
   <url>
@@ -23,27 +58,7 @@
   </url>
   
   <url>
-    <loc>/tags/golang/</loc>
-    <lastmod>2020-08-05T13:32:27+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/note/</loc>
-    <lastmod>2020-08-05T13:32:27+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/</loc>
-    <lastmod>2020-08-05T13:32:27+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/release/</loc>
-    <lastmod>2020-08-05T13:32:27+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2020-08-05T13:32:27+08:00</lastmod>
   </url>
   

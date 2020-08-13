@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="Tsuruno Yui">
+    <meta name="description" content="Record">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="go mod commands"/>
+<meta name="twitter:description" content="go mod init name // name为完整import的路径；
+ go mod init 会尝试自动解析包路径，包括$GOPATH或者使用过的其它包管理工具生成的文件    go build, go test等命令会自动向go.mod文件中写入依赖信息并拉取依赖
+ -mod = readonly 不会修改go.mod    go mod tidy 会拉取需要的依赖，删除不需要的依赖
+  go list -m all 列出当前依赖
+  go get name@vN 拉取指定版本的包(可升级可降级)
+  -u 兼容性更新
+  -d 只下载不编译
+  -t 包含测试依赖
+  -u=patch 只更新patch版本(v$Major.$Minor.$Patch)
+  name@master 更新知master分支
+  name@none 删除依赖
+    go get -u ."/>
+
+    <meta property="og:title" content="go mod commands" />
+<meta property="og:description" content="go mod init name // name为完整import的路径；
+ go mod init 会尝试自动解析包路径，包括$GOPATH或者使用过的其它包管理工具生成的文件    go build, go test等命令会自动向go.mod文件中写入依赖信息并拉取依赖
+ -mod = readonly 不会修改go.mod    go mod tidy 会拉取需要的依赖，删除不需要的依赖
+  go list -m all 列出当前依赖
+  go get name@vN 拉取指定版本的包(可升级可降级)
+  -u 兼容性更新
+  -d 只下载不编译
+  -t 包含测试依赖
+  -u=patch 只更新patch版本(v$Major.$Minor.$Patch)
+  name@master 更新知master分支
+  name@none 删除依赖
+    go get -u ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/go_mod_command/" />
+<meta property="article:published_time" content="2020-08-13T18:12:54+08:00" />
+<meta property="article:modified_time" content="2020-08-13T18:12:54+08:00" />
+
+
+    
+      <base href="/posts/go_mod_command/">
+    
+    <title>
+  go mod commands · Banbanzai
+</title>
+
+    
+      <link rel="canonical" href="/posts/go_mod_command/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.28d751104f30c16da1aa1bb04015cbe662cacfe0d1b01af4f2240ad58580069c.css" integrity="sha256-KNdREE8wwW2hqhuwQBXL5mLKz&#43;DRsBr08iQK1YWABpw=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+      <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    
+    
+    <link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.62.0-DEV" />
+  </head>
+
+  
+  
+  <body class="colorscheme-light">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Banbanzai
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/posts/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/categories/">Categories</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/tags/">Tags</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/external">External</a>
+          </li>
+        
+      
+      
+    </ul>
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">go mod commands</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2020-08-13T18:12:54&#43;08:00'>
+                August 13, 2020
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              One minute read
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="/categories/note/">note</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="/tags/golang/">golang</a>
+      <span class="separator">•</span>
+    <a href="/tags/gomod/">gomod</a></div>
+
+        </div>
+      </header>
+
+      <div>
+        <ul>
+<li>
+<p>go mod init name // name为完整import的路径；</p>
+<ul>
+<li>go mod init 会尝试自动解析包路径，包括$GOPATH或者使用过的其它包管理工具生成的文件</li>
+</ul>
+</li>
+<li>
+<p>go build, go test等命令会自动向go.mod文件中写入依赖信息并拉取依赖</p>
+<ul>
+<li>-mod = readonly 不会修改go.mod</li>
+</ul>
+</li>
+<li>
+<p>go mod tidy 会拉取需要的依赖，删除不需要的依赖</p>
+</li>
+<li>
+<p>go list -m all 列出当前依赖</p>
+</li>
+<li>
+<p>go get name@vN 拉取指定版本的包(可升级可降级)</p>
+<ul>
+<li>
+<p>-u 兼容性更新</p>
+</li>
+<li>
+<p>-d 只下载不编译</p>
+</li>
+<li>
+<p>-t 包含测试依赖</p>
+</li>
+<li>
+<p>-u=patch 只更新patch版本(v$Major.$Minor.$Patch)</p>
+</li>
+<li>
+<p>name@master 更新知master分支</p>
+</li>
+<li>
+<p>name@none 删除依赖</p>
+</li>
+</ul>
+</li>
+<li>
+<p>go get -u ./&hellip; 更新所有依赖</p>
+</li>
+<li>
+<p>go get -t -u ./&hellip; 更新包括测试文件在内的所有依赖</p>
+</li>
+<li>
+<p>import &ldquo;name/vN&rdquo; 跨主版本至vN</p>
+</li>
+<li>
+<p>go mod verify 依赖检查</p>
+</li>
+<li>
+<p>go mod edit 对go.mod文件的编辑</p>
+</li>
+<li>
+<p>go mod why 为什么需要该module，找出依赖位置 go mod why -m name</p>
+</li>
+<li>
+<p>go mod graph 依赖图 go mod graph | grep name 列出name相关的依赖关系</p>
+</li>
+<li>
+<p>go list -m -versions name 可以列出name模块的所有可用版本</p>
+</li>
+<li>
+<p>go clean -modcache 清除mod缓存</p>
+</li>
+<li>
+<p>go mod vendor 生成vendor目录(不推荐)</p>
+</li>
+<li>
+<p>go mod download 下载依赖 go get name会修改go.mod; go mod download name仅下载至缓存</p>
+</li>
+<li>
+<p>go version 查看go版本</p>
+<ul>
+<li>
+<p>go version name 查看二进制文件的go编译版本</p>
+</li>
+<li>
+<p>go version -m name 查看二进制文件的go版本，包版本，依赖版本</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>go.mod文件中的//indirect 表示直接依赖的go.mod中不包含的间接依赖（如：1、直接依赖的模块不支持go mod。2、直接依赖模块中的go.mod记录不全。3、自动处理依赖后又go get name@v指定了更新的版本。&hellip;）</p>
+<p>go.mod文件中的replace 可以将依赖用另外的repo或者本地代码替换，当前go.mod中的replace只影响当前package的构建，当前package也不会受到其他go.mod中的replace的影响</p>
+<p>go.mod文件中的+incompatible标签；例<code>github.com/author/pkg1</code> 在go mod推出之前已经开发到了v3.0.0，开发者并不准备切换为go mod的标准，引用时依然可以<code>require &quot;github.com/author/pkg1&quot;</code> 当做v1版本来使用，但是在go.mod文件中会以<code>github.com/author/pkg1 v3.0.0+incompatible</code>标记该包不兼容go mod模式，更新时需要注意</p>
+
+      </div>
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "banbanzai" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+        
+      </footer>
+    </article>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js" id="MathJax-script"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ['$', '$'], ['\\(', '\\)']
+        ],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+      <p>Miracles and Magic Are Real</p>
+    
+     © 2020
+    
+       · 
+      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-64068696-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+  </body>
+
+</html>

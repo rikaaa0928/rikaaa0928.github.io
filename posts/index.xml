@@ -6,10 +6,52 @@
     <description>Recent content in Posts on Banbanzai</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 05 Aug 2020 13:32:27 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 13 Aug 2020 18:51:17 +0800</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>go mod version</title>
+      <link>/posts/go_mod_version/</link>
+      <pubDate>Thu, 13 Aug 2020 18:51:17 +0800</pubDate>
+      
+      <guid>/posts/go_mod_version/</guid>
+      <description>vX.Y.Z
+X为Major版本，Y为Minor版本，Z为Patch版本
+Major版本保证向后兼容，Minor版本号在增加新特性、新API后增加，Patch版本号在修复bug后增加
+Minor版本 兼容性规则: 如果旧包和新包具有相同的导入路径，则新包必须向后兼容旧包。
+If an old package and a new package have the same import path, the new package must be backwards compatible with the old package.
+go get name@vN 拉取指定版本的包 go get -u name 更新name包的依赖版本至当前主版本的最新 go get -u ./... 更新所有依赖 go get -t -u ./... 更新包括测试文件在内的所有依赖 小版本发布
+git tag v1.2.0 git push origin v1.2.0 Major版本 规定：模块名中必须声明版本信息，name/vN的形式（导入路径不同），版本为v0和v1时可省略版本声明，每个主版本的路径下对应一个go.mod文件
+修改主版本必须修改import，即使用跨主版本的模块本质上视为使用不同的模块，不同主版本的同一模块可以同时存在
+跨主版本包需要新建对应的版本目录
+v0和v1的区别 v0代表非正式版本，不需要保证向后兼容，可以有破坏性更新，使用时需注意
+v1代表第一个正式版本
+开发时，当确认模块已经稳定后再切入v1版本
+主版本的发布
+mkdir v2 cp *.</description>
+    </item>
+    
+    <item>
+      <title>go mod commands</title>
+      <link>/posts/go_mod_command/</link>
+      <pubDate>Thu, 13 Aug 2020 18:12:54 +0800</pubDate>
+      
+      <guid>/posts/go_mod_command/</guid>
+      <description>go mod init name // name为完整import的路径；
+ go mod init 会尝试自动解析包路径，包括$GOPATH或者使用过的其它包管理工具生成的文件    go build, go test等命令会自动向go.mod文件中写入依赖信息并拉取依赖
+ -mod = readonly 不会修改go.mod    go mod tidy 会拉取需要的依赖，删除不需要的依赖
+  go list -m all 列出当前依赖
+  go get name@vN 拉取指定版本的包(可升级可降级)
+  -u 兼容性更新
+  -d 只下载不编译
+  -t 包含测试依赖
+  -u=patch 只更新patch版本(v$Major.$Minor.$Patch)
+  name@master 更新知master分支
+  name@none 删除依赖
+    go get -u .</description>
+    </item>
     
     <item>
       <title>github action create go release</title>
