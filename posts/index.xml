@@ -4,7 +4,7 @@
 如上参数即可。如果项目的其它依赖也有类似问题则可能需要加入更多参数，参数的获得方式和详细示例将在下面给出
 本解决方案只能解决由于java 17强封装 JDK 的内部 API的特性造成的问题，其他的兼容性问题请寻找其它方案
 参数的获得方法和示例 我们以dubbo官方仓库中的demo为例 首先使用java 17作为我们的开发环境，通过
-git@github.com:apache/dubbo.git git checkout dubbo-2.7.13 cd dubbo-demo/dubbo-demo-annotation 获得dubbo官方仓库的代码中的demo，然后可以尝试直接使用java 17编译dubbo的demo
+git clone git@github.com:apache/dubbo.git git checkout dubbo-2.7.13 cd dubbo-demo/dubbo-demo-annotation 获得dubbo官方仓库的代码中的demo，然后可以尝试直接使用java 17编译dubbo的demo
 mvn -U clean package --no-transfer-progress -D maven.test.skip=true 启动zookeeper docker run --name some-zookeepep -p 2181:2181 -it --rm zookeeper 作为注册中心 尝试运行provider
 java -jar dubbo-demo-annotation-provider/target/dubbo-demo-annotation-provider-2.7.13.jar 可以看到类似的报错:
 Caused by: java.lang.reflect.InaccessibleObjectException: Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain) throws java.lang.ClassFormatError accessible: module java.</description></item></channel></rss>
