@@ -5,4 +5,4 @@ r2s和国外vps之间的wireguard通过udptunnel互相通信，因为udp被干�
 DNS方案 国外vps上面的caddy代理google dns doh，r2s通过smartdns使用国外vps的doh
 国内vps通过dnscrypt-proxy使用国外vps的doh，通过bind向国内提供未被污染的dns服务（非必要）
 ax9000使用国内vps提供的dns（非必要）
-流程记录 设备准备 r2s vps买好 r2s刷官方openwrt(后来才知道openwrt官网也有下载，早知道的话我会选择openwrt官网的版本)，23.05的版本换掉了iptable，为了求稳，装的21.02版本 配置wireguard</description></item></channel></rss>
+流程记录 设备准备 r2s vps买好 r2s刷官方openwrt(后来才知道openwrt官网也有下载，早知道的话我会选择openwrt官网的版本)，23.05的版本换掉了iptable，为了求稳，装的21.02版本</description></item></channel></rss>
